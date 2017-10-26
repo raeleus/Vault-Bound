@@ -68,8 +68,12 @@ public class Core extends ApplicationAdapter {
     private long previous;
     private long lag;
     
+    private SplashWorker splashWorker;
+    
     @Override
     public void create() {
+        splashWorker.closeSplash();
+        
         instance = this;
         try {
             initManagers();
@@ -226,5 +230,9 @@ public class Core extends ApplicationAdapter {
     @Override
     public void resize(int width, int height) {
         stateManager.resize(width, height);
+    }
+
+    public void setSplashWorker(SplashWorker splashWorker) {
+        this.splashWorker = splashWorker;
     }
 }

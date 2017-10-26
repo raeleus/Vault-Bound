@@ -21,20 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.ray3k.vaultbound.desktop;
+package com.ray3k.vaultbound;
 
-import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
-import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.ray3k.vaultbound.Core;
-
-public class DesktopLauncher {
-	public static void main (String[] arg) {
-		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-                config.width = 800;
-                config.height = 600;
-                config.resizable = false;
-                Core core = new Core();
-                core.setSplashWorker(new DesktopSplashWorker());
-		new LwjglApplication(core, config);
-	}
+/**
+ *
+ * @author Raymond
+ */
+public interface SplashWorker {
+    public void closeSplash();
 }
