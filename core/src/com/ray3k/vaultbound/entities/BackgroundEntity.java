@@ -21,18 +21,43 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.ray3k.vaultbound.desktop;
 
-import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
-import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.ray3k.vaultbound.Core;
+package com.ray3k.vaultbound.entities;
 
-public class DesktopLauncher {
-	public static void main (String[] arg) {
-		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-                config.width = 800;
-                config.height = 600;
-                config.resizable = false;
-		new LwjglApplication(new Core(), config);
-	}
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.utils.TiledDrawable;
+import com.ray3k.vaultbound.Entity;
+import com.ray3k.vaultbound.states.GameState;
+
+public class BackgroundEntity extends Entity {
+    private TiledDrawable tiledDrawable;
+
+    @Override
+    public void create() {
+        tiledDrawable = new TiledDrawable(GameState.spineAtlas.findRegion("bg"));
+        setDepth(1000);
+    }
+
+    @Override
+    public void act(float delta) {
+    }
+
+    @Override
+    public void actEnd(float delta) {
+    }
+
+    @Override
+    public void draw(SpriteBatch spriteBatch, float delta) {
+        tiledDrawable.draw(spriteBatch, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+    }
+
+    @Override
+    public void destroy() {
+    }
+
+    @Override
+    public void collision(Entity other) {
+    }
+
 }

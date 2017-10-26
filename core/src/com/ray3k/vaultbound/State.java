@@ -21,18 +21,25 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.ray3k.vaultbound.desktop;
+package com.ray3k.vaultbound;
 
-import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
-import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.ray3k.vaultbound.Core;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-public class DesktopLauncher {
-	public static void main (String[] arg) {
-		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-                config.width = 800;
-                config.height = 600;
-                config.resizable = false;
-		new LwjglApplication(new Core(), config);
-	}
+public abstract class State {
+    private Core core;
+    
+    public abstract void start();
+    public abstract void draw(SpriteBatch spriteBatch, float delta);
+    public abstract void act(float delta);
+    public abstract void stop();
+    public abstract void dispose();
+    public abstract void resize(int width, int height);
+    
+    public State(Core core) {
+        this.core = core;
+    }
+    
+    public Core getCore() {
+        return core;
+    }
 }

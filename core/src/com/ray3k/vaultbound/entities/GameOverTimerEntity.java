@@ -21,18 +21,51 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.ray3k.vaultbound.desktop;
 
-import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
-import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+package com.ray3k.vaultbound.entities;
+
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.ray3k.vaultbound.Core;
+import com.ray3k.vaultbound.Core;
+import com.ray3k.vaultbound.Entity;
+import com.ray3k.vaultbound.Entity;
+import com.ray3k.vaultbound.states.GameOverState;
+import com.ray3k.vaultbound.states.GameState;
 
-public class DesktopLauncher {
-	public static void main (String[] arg) {
-		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-                config.width = 800;
-                config.height = 600;
-                config.resizable = false;
-		new LwjglApplication(new Core(), config);
-	}
+public class GameOverTimerEntity extends Entity {
+    private float time;
+    
+    public GameOverTimerEntity(float time) {
+        this.time = time;
+    }
+    
+    @Override
+    public void create() {
+    }
+
+    @Override
+    public void act(float delta) {
+        time -= delta;
+        if (time < 0) {
+            dispose();
+            ((GameOverState) Core.stateManager.getState("game-over")).setScore(GameState.inst().getScore());
+            Core.stateManager.loadState("game-over");
+        }
+    }
+
+    @Override
+    public void actEnd(float delta) {
+    }
+
+    @Override
+    public void draw(SpriteBatch spriteBatch, float delta) {
+    }
+
+    @Override
+    public void destroy() {
+    }
+
+    @Override
+    public void collision(Entity other) {
+    }
 }

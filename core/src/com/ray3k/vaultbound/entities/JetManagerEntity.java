@@ -21,18 +21,45 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.ray3k.vaultbound.desktop;
 
-import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
-import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.ray3k.vaultbound.Core;
+package com.ray3k.vaultbound.entities;
 
-public class DesktopLauncher {
-	public static void main (String[] arg) {
-		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-                config.width = 800;
-                config.height = 600;
-                config.resizable = false;
-		new LwjglApplication(new Core(), config);
-	}
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.MathUtils;
+import com.ray3k.vaultbound.Entity;
+import static com.ray3k.vaultbound.states.GameState.entityManager;
+
+public class JetManagerEntity extends Entity {
+    private float counter;
+
+    @Override
+    public void create() {
+        counter = 10.0f;
+    }
+
+    @Override
+    public void act(float delta) {
+        counter -= delta;
+        if (counter <= 0) {
+            entityManager.addEntity(new JetEntity());
+            counter = MathUtils.random(10.0f, 20.0f);
+        }
+    }
+
+    @Override
+    public void actEnd(float delta) {
+    }
+
+    @Override
+    public void draw(SpriteBatch spriteBatch, float delta) {
+    }
+
+    @Override
+    public void destroy() {
+    }
+
+    @Override
+    public void collision(Entity other) {
+    }
+
 }
