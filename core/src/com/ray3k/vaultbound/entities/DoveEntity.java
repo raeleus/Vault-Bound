@@ -58,7 +58,7 @@ public class DoveEntity extends SpineEntity {
             }
         }
         
-        if (getY() > Gdx.graphics.getHeight()) {
+        if (getY() > GameState.GAME_HEIGHT) {
             dispose();
         }
     }

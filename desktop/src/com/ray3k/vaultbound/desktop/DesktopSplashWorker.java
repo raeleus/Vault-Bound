@@ -27,9 +27,11 @@ package com.ray3k.vaultbound.desktop;
 import com.ray3k.vaultbound.SplashWorker;
 import java.awt.SplashScreen;
 
-public class DesktopSplashWorker implements SplashWorker{
+public class DesktopSplashWorker implements SplashWorker {
     @Override
     public void closeSplash() {
-        SplashScreen.getSplashScreen().close();
+        if (SplashScreen.getSplashScreen() != null) {
+            SplashScreen.getSplashScreen().close();
+        }
     }
 }

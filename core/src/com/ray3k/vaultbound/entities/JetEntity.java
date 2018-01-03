@@ -45,8 +45,8 @@ public class JetEntity extends SpineEntity {
 
     @Override
     public void create() {
-        setX(Gdx.graphics.getWidth());
-        setY(MathUtils.random(Gdx.graphics.getHeight() / 2.0f, Gdx.graphics.getHeight()));
+        setX(GameState.GAME_WIDTH);
+        setY(MathUtils.random(GameState.GAME_HEIGHT / 2.0f, GameState.GAME_HEIGHT));
         setMotion(1600.0f, 180.0f);
         GameState.inst().playJet();
         setDepth(-200);

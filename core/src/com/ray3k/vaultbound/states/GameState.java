@@ -34,7 +34,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.ray3k.vaultbound.Core;
 import com.ray3k.vaultbound.EntityManager;
@@ -44,7 +44,6 @@ import com.ray3k.vaultbound.entities.BackgroundEntity;
 import com.ray3k.vaultbound.entities.BackgroundManagerEntity;
 import com.ray3k.vaultbound.entities.BuildingManagerEntity;
 import com.ray3k.vaultbound.entities.JetManagerEntity;
-import com.ray3k.vaultbound.entities.MechaEntity;
 import com.ray3k.vaultbound.entities.PlayerEntity;
 
 public class GameState extends State {
@@ -54,8 +53,6 @@ public class GameState extends State {
     private static int highscore = 0;
     private OrthographicCamera gameCamera;
     private Viewport gameViewport;
-    private OrthographicCamera uiCamera;
-    private Viewport uiViewport;
     private InputManager inputManager;
     private Skin skin;
     private Stage stage;
@@ -63,6 +60,8 @@ public class GameState extends State {
     private Label scoreLabel;
     public static EntityManager entityManager;
     public static TextureAtlas spineAtlas;
+    public static final float GAME_WIDTH = 800.0f;
+    public static final float GAME_HEIGHT = 600.0f;
     
     public static GameState inst() {
         return instance;
@@ -81,24 +80,15 @@ public class GameState extends State {
         score = 0;
         internalScore = 0.0f;
         
-        inputManager = new InputManager(); 
-        
-        uiCamera = new OrthographicCamera();
-        uiViewport = new ScreenViewport(uiCamera);
-        uiViewport.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        uiViewport.apply();
-        
-        uiCamera.position.set(uiCamera.viewportWidth / 2, uiCamera.viewportHeight / 2, 0);
+        inputManager = new InputManager();
         
         gameCamera = new OrthographicCamera();
-        gameViewport = new ScreenViewport(gameCamera);
-        gameViewport.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        gameViewport = new StretchViewport(800.0f, 600.0f, gameCamera);
+        gameViewport.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), true);
         gameViewport.apply();
         
-        gameCamera.position.set(gameCamera.viewportWidth / 2, gameCamera.viewportHeight / 2, 0);
-        
         skin = Core.assetManager.get(Core.DATA_PATH + "/ui/vault-bound.json", Skin.class);
-        stage = new Stage(new ScreenViewport());
+        stage = new Stage(new StretchViewport(800.0f, 600.0f));
         
         InputMultiplexer inputMultiplexer = new InputMultiplexer();
         inputMultiplexer.addProcessor(inputManager);
@@ -170,11 +160,7 @@ public class GameState extends State {
     
     @Override
     public void resize(int width, int height) {
-        gameViewport.update(width, height);
-        gameCamera.position.set(width / 2, height / 2.0f, 0.0f);
-        
-        uiViewport.update(width, height);
-        uiCamera.position.set(uiCamera.viewportWidth / 2, uiCamera.viewportHeight / 2, 0);
+        gameViewport.update(width, height, true);
         stage.getViewport().update(width, height, true);
     }
 

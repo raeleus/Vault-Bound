@@ -24,7 +24,6 @@
 
 package com.ray3k.vaultbound.entities;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.utils.TiledDrawable;
 import com.ray3k.vaultbound.Entity;
@@ -49,7 +48,7 @@ public class BackgroundEntity extends Entity {
 
     @Override
     public void draw(SpriteBatch spriteBatch, float delta) {
-        tiledDrawable.draw(spriteBatch, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        tiledDrawable.draw(spriteBatch, 0, 0, GameState.GAME_WIDTH, GameState.GAME_HEIGHT);
     }
 
     @Override

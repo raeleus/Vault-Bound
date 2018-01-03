@@ -29,6 +29,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 import com.ray3k.vaultbound.Entity;
+import com.ray3k.vaultbound.states.GameState;
 import static com.ray3k.vaultbound.states.GameState.entityManager;
 import java.util.Iterator;
 
@@ -60,7 +61,7 @@ public class BuildingManagerEntity extends Entity {
     private void createInitial() {
         float x = 0.0f;
         
-        while (x < Gdx.graphics.getWidth()) {
+        while (x < GameState.GAME_WIDTH) {
             BuildingEntity building = spawnBuilding(false);
             building.setX(x);
             
@@ -71,7 +72,7 @@ public class BuildingManagerEntity extends Entity {
     private BuildingEntity spawnBuilding(boolean spawnExtras) {
         BuildingEntity building = new BuildingEntity(MathUtils.random(2));
         entityManager.addEntity(building);
-        building.setX(Gdx.graphics.getWidth());
+        building.setX(GameState.GAME_WIDTH);
         if (buildings.size > 0) {
             BuildingEntity lastBuilding = buildings.peek();
             building.setY(MathUtils.random(Math.max(lastBuilding.getY() - HEIGHT_DIF, LOWEST_HEIGHT), Math.min(lastBuilding.getY() + HEIGHT_DIF, HIGHEST_HEIGHT)));
@@ -116,7 +117,7 @@ public class BuildingManagerEntity extends Entity {
         BuildingEntity building = buildings.peek();
         float edge = building.getX() + building.getWidth() + gap;
         
-        if (edge < Gdx.graphics.getWidth()) {
+        if (edge < GameState.GAME_WIDTH) {
             spawnBuilding(true);
             gap = MathUtils.random(GAP_MIN, calculateMaxJump());
         }

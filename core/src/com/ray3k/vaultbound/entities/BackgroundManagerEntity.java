@@ -51,7 +51,7 @@ public class BackgroundManagerEntity extends Entity {
     private void createInitial() {
         float x = 0.0f;
         
-        while (x < Gdx.graphics.getWidth()) {
+        while (x < GameState.GAME_WIDTH) {
             BackgroundBuildingEntity building = spawnForeBuilding(x);
             
             x += building.getPatch().getTotalWidth();
@@ -59,7 +59,7 @@ public class BackgroundManagerEntity extends Entity {
         
         x = 0.0f;
         
-        while (x < Gdx.graphics.getWidth()) {
+        while (x < GameState.GAME_WIDTH) {
             BackgroundBuildingEntity building = spawnAftBuilding(x);
             
             x += building.getPatch().getTotalWidth();
@@ -85,12 +85,12 @@ public class BackgroundManagerEntity extends Entity {
         }
         
         float edge = buildingsFore.peek().getX() + buildingsFore.peek().getPatch().getTotalWidth();
-        if (edge < Gdx.graphics.getWidth()) {
+        if (edge < GameState.GAME_WIDTH) {
             spawnForeBuilding(edge);
         }
         
         edge = buildingsAft.peek().getX() + buildingsAft.peek().getPatch().getTotalWidth();
-        if (edge < Gdx.graphics.getWidth()) {
+        if (edge < GameState.GAME_WIDTH) {
             spawnAftBuilding(edge);
         }
         
@@ -98,7 +98,7 @@ public class BackgroundManagerEntity extends Entity {
         if (mechaTimer < 0) {
             mechaTimer = MathUtils.random(10.0f, 30.0f);
             MechaEntity mecha = new MechaEntity();
-            mecha.setPosition(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+            mecha.setPosition(GameState.GAME_WIDTH, GameState.GAME_HEIGHT);
             entityManager.addEntity(mecha);
         }
     }
